@@ -218,38 +218,8 @@ stripchart(litter.df.scaled$number,
            col="orange",
            pch=1)
 
-# -------------------------------------------- #
-# Linear Model n.1: Simple Scatterplot
-# -------------------------------------------- #
-plot(weight, gesttime, main="Scatterplot Example",
-     xlab="Litter Weight ", ylab="Gest Time", pch=19)
-abline(lm(gesttime~weight), col="red") # regression line (y~x)
-lines(lowess(weight,gesttime), col="blue") # regression line (y~x)
-
-# -------------------------------------------- #
-# Perform models fitting
-# -------------------------------------------- #
-
-# Model n.1: AOV-Analysis
-# -------------------------------------------- #
-
-# Fit model n.1 with AOV statistics technique
-model.n1 <- aov(weight ~ number + gesttime + dose, data=litter)
-summary(model.n1)
-
-# Plot results for model n.1
-qqnorm(resid(model.n1), main="Normal Q-Q Plot")
-qqline(resid(model.n1), col="red")
-
-
-# Model n.2: AOVP-Analysis
-# -------------------------------------------- #
-
-# Fit model n.1 with AOVP statistics technique
-model.n2 <- aovp(weight ~ number + gesttime + dose, data=litter)
-summary(model.n2)
-
 # Commeted out quit() function call
 # uncomment when running this script
 # from shell, as an instance.
 # quit()
+
