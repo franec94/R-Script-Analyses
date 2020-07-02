@@ -81,6 +81,7 @@ data$Individual <- as.factor(data$Individual)
 data$Individual <- as.numeric(data$Individual)
 
 data$Hand <- as.factor(data$Hand)
+print(data$Hand)
 data$Hand <- as.numeric(data$Hand)
 
 # Check the data frame
@@ -99,19 +100,99 @@ Summarize(Length ~ Hand,
           data=data,
           digits=3)
 
+# ============================================ #
+# Plots Section
+# ============================================ #
+
 # Plots: Boxplot
 # -------------------------------------------
 boxplot(Length ~ Hand,
         data=data,
         ylab="Length, cm")
 
+data.scaled <- as.data.frame(scale(data))
+boxplot(data.scaled[, 1], data.scaled[, 2], data.scaled[, 3],
+        main = "Multiple boxplots for comparison - scaled data",
+        at = c(1,2,3),
+        names = names(data),
+        las = 2,
+        col = c("orange","red"),
+        border = "brown",
+        horizontal = TRUE,
+        notch = FALSE # TRUE
+)
+
+# Plots: Scatter Plots
+# -------------------------------------------
+pairs(~Individual+Hand+Length, data = data, main = "Scatterplot Matrix")
+
+# Scatterplot Matrices from the glus Package
+dta <- data[c(1,2,3)] # get data
+dta.r <- abs(cor(dta)) # get correlations
+dta.col <- dmat.color(dta.r) # get colors
+# reorder variables so those with highest correlation
+# are closest to the diagonal
+dta.o <- order.single(dta.r)
+cpairs(dta, dta.o, panel.colors=dta.col, gap=.5,
+       main="Variables Ordered and Colored by Correlation" )
+
+# Plots: Histograms
+# --------------------------------------------
+hist(data$Length,
+     main="Length",
+     xlab="x",
+     # xlim=c(50,100),
+     col="darkmagenta",
+     freq=FALSE
+)
+hist(data.scaled$Length,
+     main="Length - Scaled",
+     xlab="x",
+     # xlim=c(50,100),
+     col="darkmagenta",
+     freq=FALSE
+)
+
+hist(data$Hand,
+     main="Hand",
+     xlab="x",
+     # xlim=c(50,100),
+     col="darkmagenta",
+     freq=FALSE
+)
+hist(data.scaled$Hand,
+     main="Hand - Scaled",
+     xlab="x",
+     # xlim=c(50,100),
+     col="darkmagenta",
+     freq=FALSE
+)
+
+hist(data$Individual,
+     main="Individual",
+     xlab="x",
+     # xlim=c(50,100),
+     col="darkmagenta",
+     freq=FALSE
+)
+hist(data.scaled$Individual,
+     main="Individual - Scaled",
+     xlab="x",
+     # xlim=c(50,100),
+     col="darkmagenta",
+     freq=FALSE
+)
+
+# ============================================ #
+# Models Section
+# ============================================ #
 
 # Models: Fit a linear model, more precisely
 #         fit an absolute linear model to the
 #         data
 # -------------------------------------------
-Left  = data$Length[data$Hand=="Left"]
-Right = data$Length[data$Hand=="Right"]
+Left  = data$Length[data$Hand==1] # Left  = data$Length[data$Hand=="Left"]
+Right = data$Length[data$Hand==2] # Right = data$Length[data$Hand=="Right"]
 
 plot(Left, Right,
      pch = 16,                # shape of points
@@ -124,12 +205,27 @@ plot(Left, Right,
 abline(0,1, col="blue", lwd=2) # line with intercept of 0 and slope of 1
 
 
-independence_test(Length ~ Hand,
+# ============================================ #
+# Tests Section
+# ============================================ #
+
+# independence_test(Length ~ Hand,
+independence_test(Hand ~ Length,
+                  data = data.scaled)
+
+# symmetry_test(Length ~ Hand | Individual,
+symmetry_test(Hand ~ Length | Individual,
+              data = data.scaled,
+              paired = TRUE, distribution = "exact", alternative = "greater")
+
+# independence_test(Length ~ Hand,
+independence_test(Hand ~ Length,
                   data = data)
 
-
-symmetry_test(Length ~ Hand | Individual,
-              data = data)
+# symmetry_test(Length ~ Hand | Individual,
+symmetry_test(Hand ~ Length | Individual,
+              data = data,
+              paired = TRUE, distribution = "exact", alternative = "greater")
 
 # quit()
 
