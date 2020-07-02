@@ -2,10 +2,12 @@
 
 # ============================================ #
 # Resources exploited:
+# --------------------
 # - (Permutation tests in R) https://www.r-bloggers.com/permutation-tests-in-r/
 # - (Scatterplots) https://www.statmethods.net/graphs/
 #
 # Libraries exploited:
+# --------------------
 # - Packages employed(or suggested): multcomp, coin, lmPerm
 # ============================================ # 
 
@@ -47,6 +49,7 @@ library(varhandle)
 # during earlier analyses
 rm(ls())
 
+# Close all images panels still opened
 dev.off(dev.list()["RStudioGD"])
 
 set.seed(seed = SEED) # Set seed for script repeating purposes
@@ -222,4 +225,4 @@ stripchart(litter.df.scaled$number,
 # uncomment when running this script
 # from shell, as an instance.
 # quit()
-
+ 
