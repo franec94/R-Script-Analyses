@@ -3,7 +3,9 @@
 # ============================================ #
 # Resources exploited:
 # - (Permutation tests in R) https://www.r-bloggers.com/permutation-tests-in-r/
-# -(Scatterplots) https://www.statmethods.net/graphs/scatterplot.html
+# - (Scatterplots) https://www.statmethods.net/graphs/
+#
+# Libraries exploited:
 # - Packages employed(or suggested): multcomp, coin, lmPerm
 # ============================================ # 
 
@@ -24,14 +26,16 @@ SEED = 42
 # install.packages("multcomp")
 # install.packages("lmPerm")
 # install.packages("tidyverse")
-install.packages("varhandle") 
+# install.packages("varhandle") 
 
 
 # library(car)
+library(dplyr)
 library(gclus)
 library(multcomp)
 library(lattice)
 library(lmPerm)
+library(tibble)
 library(tidyverse)
 library(varhandle)
 
@@ -43,11 +47,14 @@ library(varhandle)
 # during earlier analyses
 rm(ls())
 
+dev.off(dev.list()["RStudioGD"])
+
 set.seed(seed = SEED) # Set seed for script repeating purposes
 
 
 # -------------------------------------------- #
-# Data investigation: performing Descriptive Statistics
+# Data investigation:
+# performing Descriptive Statistics
 # -------------------------------------------- #
 
 data(litter) # Import data to be analyzed
@@ -62,6 +69,8 @@ litter.df <- data.frame(litter, stringsAsFactors = FALSE)
 # First rows of data
 print(head(litter.df))
 
+# Data Cleaning and Pre-processing
+# -------------------------------------------- # 
 is.na(litter.df)
 # Filtering step:
 # litter.df.na.removed$dose <- as.numeric(as.character(litter.df.na.removed$dose))
@@ -76,11 +85,6 @@ print(str(litter.df))
 # Filter Na values by column
 # litter.df %>% drop_na(a)
 # litter.df %>% filter(a != NA)
-
-# Data Cleaning and Pre-processing
-# -------------------------------------------- # 
-
-
 
 # Scatter Plots
 # -------------------------------------------- # 
@@ -98,6 +102,18 @@ dta.o <- order.single(dta.r)
 cpairs(dta, dta.o, panel.colors=dta.col, gap=.5,
        main="Variables Ordered and Colored by Correlation" )
 
+litter.df.scaled <- as.data.frame(scale(litter.df))
+boxplot(litter.df.scaled[, 1], litter.df.scaled[, 2], litter.df.scaled[, 3], litter.df.scaled[, 4],
+        main = "Multiple boxplots for comparison - scaled data",
+        at = c(1,2,3,4),
+        names = names(litter),
+        las = 2,
+        col = c("orange","red"),
+        border = "brown",
+        horizontal = TRUE,
+        notch = FALSE # TRUE
+)
+
 # -------------------------------------------- #
 # Linear Model n.1: Simple Scatterplot
 # -------------------------------------------- #
@@ -107,6 +123,9 @@ abline(lm(gesttime~weight), col="red") # regression line (y~x)
 lines(lowess(weight,gesttime), col="blue") # regression line (y~x)
 
 # -------------------------------------------- #
+# Perform models fitting
+# -------------------------------------------- #
+
 # Model n.1: AOV-Analysis
 # -------------------------------------------- #
 
@@ -118,7 +137,7 @@ summary(model.n1)
 qqnorm(resid(model.n1), main="Normal Q-Q Plot")
 qqline(resid(model.n1), col="red")
 
-# -------------------------------------------- #
+
 # Model n.2: AOVP-Analysis
 # -------------------------------------------- #
 
