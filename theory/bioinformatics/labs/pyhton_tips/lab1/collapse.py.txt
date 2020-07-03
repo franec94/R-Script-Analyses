@@ -1,0 +1,75 @@
+# ---------------------------------
+# Collapse event records - Solution
+# ---------------------------------
+
+# Import the 'sys' standard module for accessing command line arguments using
+# the sys.argv variable.
+import sys
+
+
+def load_records(input_file_path):
+    # Initialize a dictionary where records will be stored. The keys of the
+    # dictionary represents the name of each record present in the input file.
+    # Values are lists keeping track of the scores associated to each record.
+    records = {}
+
+    # Open the input records file.
+    fp = open(input_file_path, 'r')
+
+    # Load data.
+    for line in fp:
+        line = line.strip()
+        if line:
+            elements = line.split(',')
+            record_name = elements[0]
+            record_score = int(elements[1])
+            if record_name not in records:
+                records[record_name] = []
+            records[record_name].append(record_score)
+
+    # Close the input records file.
+    fp.close()
+
+    return records
+
+
+def collapse_records(records, output_file_path):
+    # Open the output file.
+    fp = open(output_file_path, 'w')
+
+    # Iterate of loaded records and compute the number of times it appears in
+    # the input file and its average score.
+    for record_name in records:
+        record_occurrences = len(records[record_name])
+        record_mean_score = sum(records[record_name]) / record_occurrences
+
+        # Write statistics related to the current record to the output file.
+        line = ','.join([record_name,
+                         f'{record_occurrences}',
+                         f'{record_mean_score:.3f}'])
+        fp.write(line + '\n')
+
+    # Close the output file.
+    fp.close()
+
+
+def main():
+    # Parse command line arguments.
+    input_file_path = sys.argv[1]
+    output_file_path = sys.argv[2]
+
+    # Run the collapse procedure.
+    records = load_records(input_file_path)
+    collapse_records(records, output_file_path)
+
+
+if __name__ == '__main__':
+    # Check the proper number of arguments are provided through the command
+    # line.
+    if len(sys.argv) != 3:
+        raise RuntimeError(f'Expected 3 command line arguments, got '
+                           f'{len(sys.argv)}')
+
+    print('Run main functions')
+    main()
+    print('Finish')

@@ -1,0 +1,109 @@
+# ---------------------------------
+# Conway's Game of Live - Solution
+# ---------------------------------
+
+# Import the 'sys' standard module for accessing command line arguments using
+# the sys.argv variable.
+import sys
+
+
+def load_world(world_file_path):
+    # Open the input file.
+    fp = open(world_file_path, 'r')
+
+    # Load the initial status of the world from the input file. Each 0
+    # represents a dead cell, while 1 represents alive cells.
+    world_status = []
+    for line in fp:
+        line = line.strip()
+        if line:
+            world_line = []
+            for cell in line:
+                world_line.append(int(cell))
+            world_status.append(world_line)
+
+    # Close the file.
+    fp.close()
+
+    return world_status
+
+
+def update_cell(world_status,
+                i,
+                j):
+    # Count alive cells around cell at position (i,j).
+    counter = 0
+    for a in range(max(i-1, 0), min(i+2, len(world_status))):
+        for b in range(max(j-1, 0), min(j+2, len(world_status[a]))):
+
+            if not (a == i and b == j) and world_status[a][b] == 1:
+                counter += 1
+
+    # Decide the next status of the cell at position (i,j).
+    next_cell_status = 0
+    if world_status[i][j] == 0 and counter == 3:
+        next_cell_status = 1
+    elif world_status[i][j] == 1 and (counter == 2 or counter == 3):
+        next_cell_status = 1
+
+    return next_cell_status
+
+
+def simulate(world_status):
+    # Create an empty world status
+    next_world_status = []
+    for world_line in world_status:
+        next_world_status.append([0]*len(world_line))
+
+    # Update the status of the world.
+    for i in range(len(world_status)):
+        for j in range(len(world_status[i])):
+            next_world_status[i][j] = update_cell(world_status, i, j)
+
+    return next_world_status
+
+
+def dump_world(output_file_path,
+               world_status):
+    # Open the output file.
+    fp = open(output_file_path, 'w')
+
+    # Dump the status of the world.
+    for world_line in world_status:
+        for cell in world_line:
+            fp.write(str(cell))
+        fp.write('\n')
+
+    # Close the file.
+    fp.close()
+
+
+def main():
+    # Parse command line arguments.
+    world_file_path = sys.argv[1]
+    n_generations = int(sys.argv[2])
+    output_file_path = sys.argv[3]
+
+    # Load the initial condition of the world.
+    world_status = load_world(world_file_path)
+
+    # Simulate the generations.
+    for generation in range(n_generations):
+        print(f'Simulate generation {generation}')
+        world_status = simulate(world_status)
+
+    # Write the condition of the world after the simulation.
+    dump_world(output_file_path,
+               world_status)
+
+
+if __name__ == '__main__':
+    # Check the proper number of arguments are provided through the command
+    # line.
+    if len(sys.argv) != 4:
+        raise RuntimeError(f'Expected 4 command line arguments, got '
+                           f'{len(sys.argv)}')
+
+    print('Run main functions')
+    main()
+    print('Finish')
