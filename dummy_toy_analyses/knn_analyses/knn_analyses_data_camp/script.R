@@ -4,6 +4,8 @@
 # Setup script
 # ========================================
 rm(list = ls())
+# Close all images panels still opened
+dev.off(dev.list()["RStudioGD"])
 
 
 # ========================================
@@ -16,6 +18,9 @@ source(all.libraries)
 
 utils.src <- "D:/statistics/analyses/R-Script-Analyses/dummy_toy_analyses/knn_analyses/knn_analyses_data_camp/utils.R"
 source(utils.src)
+
+utils.descriptive_statistics.src <- "D:/statistics/analyses/R-Script-Analyses/dummy_toy_analyses/knn_analyses/knn_analyses_data_camp/utils/descriptive_statistics.R"
+source(utils.descriptive_statistics.src)
 
 # Global Variables
 # ----------------------------------------
@@ -35,6 +40,8 @@ ind <- sample(2, nrow(iris), replace=TRUE, prob=c(0.67, 0.33))
 
 # show.some.plots.data.iris(iris)
 # show.some.stats.data.iris(iris)
+
+scatter_plots.input.dataset(iris, c(1,2,3,4))
 
 # ========================================
 # Train Step
@@ -61,6 +68,8 @@ iris.test <- res$iris.test
 iris.trainLabels <- res$iris.trainLabels
 iris.testLabels <- res$iris.testLabels
 
-run.knn.analysis(iris.training, iris.test, iris.trainLabels, iris.testLabels, verbose = 1)
+# run.knn.analysis(iris.training, iris.test, iris.trainLabels, iris.testLabels, verbose = 0)
+
+train.knn.by.caret(iris)
 
 # quit()
