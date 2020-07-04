@@ -34,10 +34,14 @@ get.iris.dataset <- function(url = NULL, columns = NULL, verbose = 0) {
 }
 
 show.some.plots.data.iris <- function(iris) {
-  # Iris scatter plot
-  iris %>% ggvis(~Sepal.Length, ~Sepal.Width, fill = ~Species) %>% layer_points()
   
-  iris %>% ggvis(~Petal.Length, ~Petal.Width, fill = ~Species) %>% layer_points()
+  p <- ggvis(iris, x = ~Sepal.Length, y = ~Sepal.Width)
+  layer_points(p)
+  
+  # Iris scatter plot
+  # iris %>% ggvis(~Sepal.Length, ~Sepal.Width, fill = ~Species) %>% layer_points()
+  
+  # iris %>% ggvis(~Petal.Length, ~Petal.Width, fill = ~Species) %>% layer_points()
 }
 
 

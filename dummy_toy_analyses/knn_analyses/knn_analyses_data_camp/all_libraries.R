@@ -9,13 +9,21 @@ required.libraries <- c(
   "caret",
   "class",
   "data.table",
+  "gclus",
   "dplyr",
   "ggvis",
   "gmodels",
   "iterators",
+  "lattice",
+  "lmPerm",
   "magrittr",
+  "multcomp",
+  "plotly",
   "readxl",
-  "tidyverse"
+  "shiny",
+  "tibble",
+  "tidyverse",
+  "varhandle"
 )
 
 for (a.library in required.libraries) {
@@ -33,13 +41,17 @@ library(dplyr)    # alternatively, this also loads %>%
 library(gclus)
 library(ggvis)    # Load in `ggvis`
 library(gmodels)
+# library(hflights)
+library(Hmisc)
 library(iterators)
 library(lattice)
 library(lmPerm)
 library(magrittr) # needs to be run every time you start R and want to use %>%
 library(multcomp)
-library(tibble)
+library(plotly)
 library(readxl)
+library(shiny)
+library(tibble)
 library(tidyverse)
 library(varhandle)
 

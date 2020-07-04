@@ -3,7 +3,10 @@
 # ========================================
 # Setup script
 # ========================================
-rm(list = ls())
+if (length((ls())) != 0) {
+  rm(list = ls())
+}
+
 # Close all images panels still opened
 dev.off(dev.list()["RStudioGD"])
 
@@ -38,7 +41,7 @@ ind <- sample(2, nrow(iris), replace=TRUE, prob=c(0.67, 0.33))
 # Data Investigation Step 
 # ========================================
 
-# show.some.plots.data.iris(iris)
+show.some.plots.data.iris(iris)
 # show.some.stats.data.iris(iris)
 
 scatter_plots.input.dataset(iris, c(1,2,3,4))
