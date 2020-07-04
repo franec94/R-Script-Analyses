@@ -40,6 +40,7 @@ library(data.table)
 library(dplyr)    # alternatively, this also loads %>%
 library(gclus)
 library(ggvis)    # Load in `ggvis`
+library(ggplot2)    # Load in `ggvis`
 library(gmodels)
 # library(hflights)
 library(Hmisc)

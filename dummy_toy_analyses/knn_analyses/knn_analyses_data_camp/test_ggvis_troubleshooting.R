@@ -1,5 +1,6 @@
 library(dplyr)
 library("ggvis")
+library(ggplot2)
 
 
 file <- "https://github.com/smach/NICAR15data/raw/master/testscores.csv"
