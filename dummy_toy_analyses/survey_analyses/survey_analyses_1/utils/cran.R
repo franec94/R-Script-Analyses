@@ -1,4 +1,5 @@
 required.libraries <- c(
+  "cowplot",
   "dplyr",
   "gridExtra",
   "hexbin",
@@ -11,9 +12,11 @@ for (a.library in required.libraries) {
   res <- any(grepl(a.library, installed.packages()))
   if (res == F) {
     print(c("Missing", a.library))
+    # install.packages(a.library)
   }
 }
 
+library(cowplot)
 library("dplyr")
 library(gridExtra)
 library("hexbin")
