@@ -68,7 +68,11 @@ print(head(missing_dates))
 
 # Faceting Time Series Data
 # ---------------------------------------------------
-faceting.time_series.surveys.data(surveys)
+# faceting.time_series.surveys.data(surveys)
+
+
+pair.surveys.plot(surveys) 
+my.surveys.save_image(surveys)
 
 
 # quit()

@@ -1,5 +1,6 @@
-libraries <- c(
+required.libraries <- c(
   "dplyr",
+  "gridExtra",
   "hexbin",
   "lubridate",
   "tidyverse"
@@ -14,6 +15,7 @@ for (a.library in required.libraries) {
 }
 
 library("dplyr")
+library(gridExtra)
 library("hexbin")
 library("lubridate")
 library("tidyverse")
