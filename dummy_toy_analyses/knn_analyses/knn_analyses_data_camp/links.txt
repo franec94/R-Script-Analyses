@@ -1,0 +1,11 @@
+# ========================================
+# Links
+# ========================================
+
+- Get data out of excel and into R with readxl:
+  https://blog.rstudio.com/2015/04/15/readxl-0-1-0/
+
+  ========================================
+
+- Machine Learning in R for beginners:
+  https://www.datacamp.com/community/tutorials/machine-learning-in-r
