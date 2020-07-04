@@ -24,7 +24,7 @@ str(surveys)
 # ---------------------------------------------------
 
 # Bar plot of the number of females and males captured during the experiment:
-plot(as.factor(surveys$sex))
+# plot(as.factor(surveys$sex))
 
 
 # Inspect Date-time Data
@@ -58,7 +58,7 @@ print(head(missing_dates))
 
 # Plot Data
 # ---------------------------------------------------
-# plot.surveys.data(surveys)
+plot.surveys.data(surveys)
 
 
 # Plot Time Series Data
@@ -71,8 +71,10 @@ print(head(missing_dates))
 # faceting.time_series.surveys.data(surveys)
 
 
-pair.surveys.plot(surveys) 
-my.surveys.save_image(surveys)
+# Complex Graphics Data
+# ---------------------------------------------------
+# pair.surveys.plot(surveys) 
+# my.surveys.save_image(surveys)
 
 
 # quit()

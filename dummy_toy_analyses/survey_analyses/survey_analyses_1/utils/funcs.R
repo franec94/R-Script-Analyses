@@ -87,7 +87,7 @@ plot.surveys.data <- function(surveys) {
   # surveys_plot + geom_hex()
   # surveys_plot + geom_point(alpha = 0.1, color = "blue")
   # surveys_plot + geom_point(alpha = 0.1, aes(color = species_id))
-  ggplot(data = surveys_complete, mapping = aes(x = species_id, y = weight)) +
+  ggplot(data = surveys, mapping = aes(x = species_id, y = weight)) +
     geom_boxplot(alpha = 0.1) +
     geom_jitter(alpha = 0.3, color = "tomato")
 }
