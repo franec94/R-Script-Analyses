@@ -7,8 +7,11 @@ if (length((ls())) != 0) {
   rm(list = ls())
 }
 
-# Close all images panels still opened
-dev.off(dev.list()["RStudioGD"])
+# Close all images panels still 
+if(length(dev.list()["RStudioGD"]) != 0) {
+  dev.off(dev.list()["RStudioGD"])
+}
+
 
 
 # ========================================
@@ -71,7 +74,7 @@ iris.test <- res$iris.test
 iris.trainLabels <- res$iris.trainLabels
 iris.testLabels <- res$iris.testLabels
 
-# run.knn.analysis(iris.training, iris.test, iris.trainLabels, iris.testLabels, verbose = 0)
+run.knn.analysis(iris.training, iris.test, iris.trainLabels, iris.testLabels, verbose = 0)
 
 train.knn.by.caret(iris)
 
