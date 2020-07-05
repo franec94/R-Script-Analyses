@@ -41,6 +41,14 @@ density.plot.surveys <- function(surveys, attr, target.attr, scatter.plot.labels
 }
 
 
+# Show BoxPlots for Surveys
+# :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: #
+box.plot.survey <- function(surveys, attr.1, attr.2, box.plot.labels=NULL) {
+  print(box.plot.labels)
+  box.plot.util(surveys, attr.1, attr.2, box.plot.labels)
+}
+
+
 multiple.density.plots.surveys <- function (surveys, attrs, target.attr, density.plot.labels=NULL) {
   # plot_grid(p1, p2, labels = c('A', 'B'), label_size = 12)
   

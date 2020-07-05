@@ -88,7 +88,7 @@ scatter.plot.labels <- list(
   c('Genus vs Weight', 'genus', 'weight', 'sex')
 )
 names(scatter.plot.labels) <- c("plot.1", "plot.2")
-multiple.scatter.plots.surveys(surveys, attrs.pairs, target.attr=sex, scatter.plot.labels=scatter.plot.labels )
+# (surveys, attrs.pairs, target.attr=sex, scatter.plot.labels=scatter.plot.labels )
 
 density.plot.labels <- c('Density Estimate Weight Attribute', 'genus', 'sex')
 # density.plot.surveys(surveys[ind, ], weight, sex, density.plot.labels)
@@ -99,6 +99,10 @@ density.plot.labels <- c(
   c('Density Estimate', 'genus', 'sex')
 )
 # multiple.density.plots.surveys(surveys, attrs, target.attr=sex, density.plot.labels=density.plot.labels)
+
+box.plot.labels <- c('Boxplot(species_id vs weight)', 'species_id', 'weight')
+print(box.plot.labels)
+box.plot.survey(surveys, species_id, weight, box.plot.labels)
 
 # ========================================
 # Train Step
