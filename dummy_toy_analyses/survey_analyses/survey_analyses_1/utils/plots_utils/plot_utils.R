@@ -5,7 +5,7 @@ scatter.plot.util <- function(dataset, attr.1, attr.2, target.attr, scatter.plot
   
   a.scatter.plot <- get.scatter.plot.util(dataset=dataset,
                     attr.1=attr.1, 
-                    attr.2=target.attr, 
+                    attr.2=attr.2, 
                     target.attr=target.attr, 
                     scatter.plot.labels=scatter.plot.labels, 
                     theme_cowplot_flag = theme_cowplot_flag)
@@ -33,7 +33,7 @@ get.scatter.plot.util <- function(dataset, attr.1, attr.2, target.attr, scatter.
     attr.2.local <- attr.2
   }
   
-  a.scatter.plot <- ggplot(dataset, aes(dataset[, attr.1], dataset[, attr.2], color = target.attr))
+  a.scatter.plot <- ggplot(dataset, aes(attr.1.local, attr.2.local, color = target.attr))
   
   if (theme_cowplot_flag == F) {
     a.scatter.plot <- a.scatter.plot +
