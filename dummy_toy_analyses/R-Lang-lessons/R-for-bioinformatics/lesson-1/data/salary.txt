@@ -1,0 +1,5 @@
+case id gender deg yrdeg field startyr year rank admin
+1 1 F Other 92 Other 95 95 Assistant 0
+2 2 M Other 91 Other 94 94 Assistant 0
+3 2 M Other 91 Other 94 94 Assistant 0
+4 4 M PhD 96 Other 95 95 Assistant 0
