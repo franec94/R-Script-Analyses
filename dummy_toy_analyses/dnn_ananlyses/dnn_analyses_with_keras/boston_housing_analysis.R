@@ -54,8 +54,11 @@ build_model <- function(input_shape) {
 dataset <- dataset_boston_housing()
 c(c(train_data, train_targets), c(test_data, test_targets)) %<-% dataset
 
+
+train_data_df <- data.frame(train_data)
+
 #building a seaborn pairplot using pairplot()
-sns$pairplot(r_to_py(dataset))
+sns$pairplot(r_to_py(train_data_df))
 #display the plot
 plt$show()
 
@@ -70,6 +73,8 @@ std.train_data <- apply(train_data, 2, sd)
 
 train_data <- scale(train_data, center = mean.train_data, scale = std.train_data)
 test_data <- scale(test_data, center = mean.train_data, scale = std.train_data)
+
+
 
 
 input_shape <- dim(train_data)[[2]]
