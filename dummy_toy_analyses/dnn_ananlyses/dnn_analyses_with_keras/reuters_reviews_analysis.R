@@ -3,6 +3,7 @@
 # ========================================
 # Setup script
 # ========================================
+
 # Remove all old data variables
 if (length((ls())) != 0) {
   rm(list = ls())
@@ -16,6 +17,7 @@ if(length(dev.list()["RStudioGD"]) != 0) {
 # ========================================
 # Activate Packages
 # ========================================
+
 library(reticulate)
 use_virtualenv("r-tensorflow")
 library(keras)

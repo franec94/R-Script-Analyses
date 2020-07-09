@@ -3,6 +3,7 @@
 # ========================================
 # Setup script
 # ========================================
+
 if (length((ls())) != 0) {
   rm(list = ls())
 }
@@ -12,10 +13,25 @@ if(length(dev.list()["RStudioGD"]) != 0) {
   dev.off(dev.list()["RStudioGD"])
 }
 
+# ========================================
+# Activate Packages
+# ========================================
 
 library(reticulate)
 use_virtualenv("r-tensorflow")
 library(keras)
+
+# reticulate::py_discover_config() 
+
+#importing required Python libraries/modules
+sns <- import('seaborn')
+plt <- import('matplotlib.pyplot')
+pd <- import('pandas')
+
+
+# ========================================
+# Define Some Functions
+# ========================================
 
 build_model <- function(input_shape) {
   model <- keras_model_sequential() %>%
@@ -31,9 +47,17 @@ build_model <- function(input_shape) {
   )
 }
 
+# ========================================
+# Begin Script
+# ========================================
 
 dataset <- dataset_boston_housing()
 c(c(train_data, train_targets), c(test_data, test_targets)) %<-% dataset
+
+#building a seaborn pairplot using pairplot()
+sns$pairplot(r_to_py(dataset))
+#display the plot
+plt$show()
 
 str(train_data)
 str(train_targets)
@@ -62,8 +86,5 @@ plot(history)
 
 predictions <- model %>% predict(test_data)
 print(dim(predictions))
-
-k <- 2
-indeces <- sample(1:nrow(train_data))
 
 # quit()

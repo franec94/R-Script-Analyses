@@ -1,5 +1,5 @@
 # ========================================
-# Some Functions for Reuters dataset
+# Some Functions for IMDB dataset
 # analyses
 # ========================================
 
@@ -8,23 +8,7 @@ build_model <- function(input_shape) {
     layer_dense(units = 64, activation = "relu",
                 input_shape = input_shape) %>%
     layer_dense(units = 64, activation = "relu") %>%
-    layer_dense(units = 46, activation = "softmax")
-  
-  model %>% compile(
-    optimizer = "rmsprop",
-    loss = "categorical_crossentropy",
-    metrics = c("accuracy")
-  )
-}
-
-
-build_model_with_l2_reg <- function(input_shape, l2_reg_rate = 0.001) {
-  model <- keras_model_sequential() %>%
-    layer_dense(units = 64, activation = "relu",
-                input_shape = input_shape)
-    layer_dense(units = 64, activation = "relu",
-                kernel_regularizer = regularizer_l2(l2_reg_rate)) %>%
-    layer_dense(units = 46, activation = "softmax")
+    layer_dense(units = 1, activation = "softmax")
   
   model %>% compile(
     optimizer = "rmsprop",
@@ -41,7 +25,7 @@ build_model_with_dropout <- function(input_shape, dropout_rate = 0.5) {
     layer_dropout(rate = dropout_rate) %>%
     layer_dense(units = 64, activation = "relu") %>%
     layer_dropout(rate = dropout_rate) %>%
-    layer_dense(units = 46, activation = "softmax")
+    layer_dense(units = 1, activation = "softmax")
   
   model %>% compile(
     optimizer = "rmsprop",
@@ -56,7 +40,7 @@ build_small_model <- function(input_shape) {
     layer_dense(units = 16, activation = "relu",
                 input_shape = input_shape) %>%
     layer_dense(units = 16, activation = "relu") %>%
-    layer_dense(units = 46, activation = "softmax")
+    layer_dense(units = 1, activation = "softmax")
   
   model %>% compile(
     optimizer = "rmsprop",
@@ -73,7 +57,7 @@ build_small_model_with_dropout <- function(input_shape, dropout_rate = 0.5) {
     layer_dropout(rate = dropout_rate) %>%
     layer_dense(units = 16, activation = "relu") %>%
     layer_dropout(rate = dropout_rate) %>%
-    layer_dense(units = 46, activation = "softmax")
+    layer_dense(units = 1, activation = "softmax")
   
   model %>% compile(
     optimizer = "rmsprop",
@@ -105,7 +89,7 @@ build_information_bottleneck_model_with_dropout <- function(input_shape, dropout
     layer_dropout(rate = dropout_rate) %>%
     layer_dense(units = 4, activation = "relu") %>%
     layer_dropout(rate = dropout_rate) %>%
-    layer_dense(units = 46, activation = "softmax")
+    layer_dense(units = 1, activation = "softmax")
   
   model %>% compile(
     optimizer = "rmsprop",
