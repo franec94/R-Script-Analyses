@@ -11,11 +11,11 @@ build_model <- function(input_shape) {
     layer_dense(units = 64, activation = "relu",
                 input_shape = input_shape) %>%
     layer_dense(units = 64, activation = "relu") %>%
-    layer_dense(units = 2, activation = "softmax")
+    layer_dense(units = 1, activation = "sigmoid")
   
   model %>% compile(
     optimizer = "rmsprop",
-    loss = "categorical_crossentropy",
+    loss = "binary_crossentropy",
     metrics = c("accuracy")
   )
 }
@@ -28,11 +28,11 @@ build_model_with_dropout <- function(input_shape, dropout_rate = 0.5) {
     layer_dropout(rate = dropout_rate) %>%
     layer_dense(units = 64, activation = "relu") %>%
     layer_dropout(rate = dropout_rate) %>%
-    layer_dense(units = 2, activation = "softmax")
+    layer_dense(units = 1, activation = "sigmoid")
   
   model %>% compile(
     optimizer = "rmsprop",
-    loss = "categorical_crossentropy",
+    loss = "binary_crossentropy",
     metrics = c("accuracy")
   )
 }
@@ -43,11 +43,11 @@ build_small_model <- function(input_shape) {
     layer_dense(units = 16, activation = "relu",
                 input_shape = input_shape) %>%
     layer_dense(units = 16, activation = "relu") %>%
-    layer_dense(units = 2, activation = "softmax")
+    layer_dense(units = 1, activation = "sigmoid")
   
   model %>% compile(
     optimizer = "rmsprop",
-    loss = "categorical_crossentropy",
+    loss = "binary_crossentropy",
     metrics = c("accuracy")
   )
 }
@@ -60,11 +60,11 @@ build_small_model_with_dropout <- function(input_shape, dropout_rate = 0.5) {
     layer_dropout(rate = dropout_rate) %>%
     layer_dense(units = 16, activation = "relu") %>%
     layer_dropout(rate = dropout_rate) %>%
-    layer_dense(units = 2, activation = "softmax")
+    layer_dense(units = 1, activation = "sigmoid")
   
   model %>% compile(
     optimizer = "rmsprop",
-    loss = "categorical_crossentropy",
+    loss = "binary_crossentropy",
     metrics = c("accuracy")
   )
 }
@@ -75,11 +75,11 @@ build_information_bottleneck_model <- function(input_shape) {
     layer_dense(units = 64, activation = "relu",
                 input_shape = input_shape) %>%
     layer_dense(units = 4, activation = "relu") %>%
-    layer_dense(units = 2, activation = "softmax")
+    layer_dense(units = 1, activation = "sigmoid")
   
   model %>% compile(
     optimizer = "rmsprop",
-    loss = "categorical_crossentropy",
+    loss = "binary_crossentropy",
     metrics = c("accuracy")
   )
 }
@@ -92,15 +92,14 @@ build_information_bottleneck_model_with_dropout <- function(input_shape, dropout
     layer_dropout(rate = dropout_rate) %>%
     layer_dense(units = 4, activation = "relu") %>%
     layer_dropout(rate = dropout_rate) %>%
-    layer_dense(units = 2, activation = "softmax")
+    layer_dense(units = 1, activation = "sigmoid")
   
   model %>% compile(
     optimizer = "rmsprop",
-    loss = "categorical_crossentropy",
+    loss = "binary_crossentropy",
     metrics = c("accuracy")
   )
 }
-
 
 # ========================================
 # General Purpose Utils

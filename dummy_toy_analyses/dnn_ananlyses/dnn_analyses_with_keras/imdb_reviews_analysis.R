@@ -41,8 +41,8 @@ print(decoded_newswire)
 x_train <- vectorize_sequences(train_data)
 x_test <- vectorize_sequences(test_data)
 
-one_hot_train_labels <- to_one_hot(train_targets) # to_categorical()
-one_hot_test_labels <- to_one_hot(test_targets)
+y_train <- as.numeric(train_targets)
+y_test <- as.numeric(test_targets)
 
 input_shape <- dim(x_train)[[2]]
 model <- build_model(input_shape = input_shape)
@@ -52,8 +52,8 @@ val_indices <- 1:1000
 x_val <- x_train[val_indices, ]
 partial_x_train <- x_train[-val_indices, ]
 
-y_val <- one_hot_train_labels[val_indices, ]
-partial_y_train <- one_hot_train_labels[-val_indices, ]
+y_val <- y_train[val_indices, ]
+partial_y_train <- y_train[-val_indices, ]
 
 
 # Train Models
@@ -68,9 +68,26 @@ ratio_correct_answers <- length(which(test_targets == test_labels_copy)) / lengt
 print(ratio_correct_answers)
 
 # Train Default Model
-train_default_model(
-  x_train, x_test,
-  one_hot_train_labels, one_hot_test_labels,
-  epochs = 5)
+# train_default_model(x_train, x_test, y_train, y_test, epochs = 5)
+
+input_shape <- dim(x_train)[[2]]
+model <- build_model(input_shape = input_shape)
+
+history <- model %>%  fit(
+  x_train,
+  y_train,
+  epochs = 20,
+  batch_size = 512,
+)
+plot(history)
+
+# Test Model (Default)
+# --------------------------------------------
+results <- model %>% evaluate(x_test)
+print(results)
+
+predictions <- model %>% predict(x_test, y_test)
+
+print(dim(predictions))
 
 # quit()

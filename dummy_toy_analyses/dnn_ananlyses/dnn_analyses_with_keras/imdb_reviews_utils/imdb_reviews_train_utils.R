@@ -2,7 +2,7 @@
 
 # Train Default Model
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: #
-train_default_model <- function(x_train, x_test, one_hot_train_labels, one_hot_test_labels, epochs = 20) {
+train_default_model <- function(x_train, x_test, y_train, y_test, epochs = 20) {
   
   # Train Model (Default)
   # --------------------------------------------
@@ -11,7 +11,7 @@ train_default_model <- function(x_train, x_test, one_hot_train_labels, one_hot_t
   
   history <- model %>%  fit(
     x_train,
-    one_hot_train_labels,
+    y_train,
     epochs = epochs,
     batch_size = 512,
   )
@@ -22,7 +22,7 @@ train_default_model <- function(x_train, x_test, one_hot_train_labels, one_hot_t
   results <- model %>% evaluate(x_test)
   print(results)
   
-  predictions <- model %>% predict(x_test, one_hot_test_labels)
+  predictions <- model %>% predict(x_test, y_test)
   
   print(dim(predictions))
   
@@ -33,7 +33,7 @@ train_default_model <- function(x_train, x_test, one_hot_train_labels, one_hot_t
   
   history <- model %>%  fit(
     x_train,
-    one_hot_train_labels,
+    y_train,
     epochs = epochs,
     batch_size = 512,
   )
@@ -44,7 +44,7 @@ train_default_model <- function(x_train, x_test, one_hot_train_labels, one_hot_t
   results <- model %>% evaluate(x_test)
   print(results)
   
-  predictions <- model %>% predict(x_test, one_hot_test_labels)
+  predictions <- model %>% predict(x_test, y_test)
   
   print(dim(predictions))
   
@@ -55,7 +55,7 @@ train_default_model <- function(x_train, x_test, one_hot_train_labels, one_hot_t
   
   history <- model %>%  fit(
     x_train,
-    one_hot_train_labels,
+    y_train,
     epochs = epochs,
     batch_size = 512,
   )
@@ -66,7 +66,7 @@ train_default_model <- function(x_train, x_test, one_hot_train_labels, one_hot_t
   results <- model %>% evaluate(x_test)
   print(results)
   
-  predictions <- model %>% predict(x_test, one_hot_test_labels)
+  predictions <- model %>% predict(x_test, y_test)
 }
 
 # End imdb_reviews_train_utils
