@@ -13,6 +13,8 @@ source("reuters_reviews_utils/reuters_reviews_setup_utils.R")
 # Begin Script
 # ========================================
 
+# Fetch Dataset about Reuters reviews
+# --------------------------------------------
 dataset <- dataset_reuters(num_words = 10000)
 c(c(train_data, train_targets), c(test_data, test_targets)) %<-% dataset
 
@@ -36,13 +38,14 @@ decoded_newswire <- sapply(train_data[[1]], function(index) {
 })
 print(decoded_newswire)
 
+
 # Preprocessing Data
 # --------------------------------------------
 x_train <- vectorize_sequences(train_data)
 x_test <- vectorize_sequences(test_data)
 
-one_hot_train_labels <- to_one_hot(train_targets) # to_categorical()
-one_hot_test_labels <- to_one_hot(test_targets)
+one_hot_train_labels <- to_categorical(train_targets) # to_one_hot()
+one_hot_test_labels <- to_categorical(test_targets)
 
 input_shape <- dim(x_train)[[2]]
 model <- build_model(input_shape = input_shape)
@@ -55,6 +58,19 @@ partial_x_train <- x_train[-val_indices, ]
 y_val <- one_hot_train_labels[val_indices, ]
 partial_y_train <- one_hot_train_labels[-val_indices, ]
 
+
+# Train Models
+# ----------------------------------------
+
+# Running Random Model, that is,
+# a Random Classifier
+# --------------------------------------------
+test_labels_copy <- test_targets
+test_labels_copy <- sample(test_labels_copy)
+ratio_correct_answers <- length(which(test_targets == test_labels_copy)) / length(test_labels_copy)
+print(ratio_correct_answers)
+
+
 # Train a Model just against overall
 # trianing examples
 # --------------------------------------------
@@ -66,6 +82,14 @@ history <- model %>%  fit(
   batch_size = 512,
 )
 plot(history)
+
+# Test Model
+# --------------------------------------------
+results <- model %>% evaluate(x_test)
+print(results)
+
+predictions <- model %>% predict(x_test, one_hot_test_labels)
+
 
 # Train a Model splitting training set
 # into two subsets, a partial train set and
@@ -81,7 +105,7 @@ history <- model %>%  fit(
 )
 plot(history)
 
-# Test Model
+# Test Model (Validation-Set Adopted)
 # --------------------------------------------
 results <- model %>% evaluate(x_test)
 print(results)
@@ -91,13 +115,5 @@ predictions <- model %>% predict(x_test, one_hot_test_labels)
 print(dim(predictions))
 print(sum(predictions[1, ]))
 print(which.max(predictions[1, ]))
-
-# Running Random Model, that is,
-# a Random Classifier
-# --------------------------------------------
-test_labels_copy <- test_targets
-test_labels_copy <- sample(test_labels_copy)
-ratio_correct_answers <- length(which(test_targets == test_labels_copy)) / length(test_labels_copy)
-print(ratio_correct_answers)
 
 # quit()

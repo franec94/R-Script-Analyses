@@ -59,6 +59,14 @@ partial_y_train <- one_hot_train_labels[-val_indices, ]
 # Train Models
 # ----------------------------------------
 
+# Running Random Model, that is,
+# a Random Classifier
+# --------------------------------------------
+test_labels_copy <- test_targets
+test_labels_copy <- sample(test_labels_copy)
+ratio_correct_answers <- length(which(test_targets == test_labels_copy)) / length(test_labels_copy)
+print(ratio_correct_answers)
+
 # Train Default Model
 train_default_model(
   x_train, x_test,
