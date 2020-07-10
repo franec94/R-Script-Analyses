@@ -1,8 +1,18 @@
 #!/usr/bin/env Rscript
 
 # ========================================
+# Resources: 
+# Dataset description: https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html
+# ========================================
+
+# ========================================
 # Setup script & Activate Libraries
 # ========================================
+SEED = 1234
+set.seed(seed = SEED)
+
+setwd("./boston_housing_analyses")
+
 source("boston_housing_utils/boston_housing_setup_utils.R")
 
 # ========================================
@@ -32,7 +42,16 @@ str(test_targets)
 # plot.via.seaborn.pairplot.diag.kde(train_data)
 
 # Show joinplot about not yet pre-processed train set
-show.joinplot.via.seaborn(train_data, attr.1 = "CRIM", attr.2 = "ZN")
+# show.joinplot.via.seaborn(train_data, attr.1 = "CRIM", attr.2 = "ZN")
+
+# Show Complex Plot about not yet pre-processed train set
+# plot.via.seaborn.pairplot.complex(train_data)
+
+# Show Raw Correlation Matrix about not yet pre-processed train set
+# raw.plot.pairs(train_data)
+
+# # Show Raw Boxplots about not yet pre-processed train set
+raw.box.plot(train_data)
 
 # Preprocess Dataset
 # ----------------------------------------
@@ -43,15 +62,15 @@ train_data <- scale(train_data, center = mean.train_data, scale = std.train_data
 test_data <- scale(test_data, center = mean.train_data, scale = std.train_data)
 
 # Show pairplot about pre-processed train set
-plot.via.seaborn.pairplot.diag.kde(train_data)
+# plot.via.seaborn.pairplot.diag.kde(train_data)
 
-# Show joinplot about not yet processed train set
+# Show joinplot about pre-processed train set
 # show.joinplot.via.seaborn(train_data, attr.1 = "CRIM", attr.2 = "ZN")
 
-# Train Models
-# ----------------------------------------
+# Show Raw Correlation Matrix about yet pre-processed train set
+# raw.plot.pairs(train_data)
 
-# Train Default Model
-train_default_model(train_data, test_data, train_targets, test_targets)
+# Show Raw Boxplots about pre-processed train set
+raw.box.plot(train_data)
 
 # quit()
