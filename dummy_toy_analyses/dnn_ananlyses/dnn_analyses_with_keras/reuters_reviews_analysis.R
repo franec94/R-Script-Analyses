@@ -1,28 +1,13 @@
 #!/usr/bin/env Rscript
 
 # ========================================
-# Setup script
+# Setup script & Activate Libraries
 # ========================================
-
-# Remove all old data variables
-if (length((ls())) != 0) {
-  rm(list = ls())
-}
-
-# Close all images, panels still open
-if(length(dev.list()["RStudioGD"]) != 0) {
-  dev.off(dev.list()["RStudioGD"])
-}
+source("reuters_reviews_utils/reuters_reviews_setup_utils.R")
 
 # ========================================
-# Activate Packages
+# Define Some Functions
 # ========================================
-
-library(reticulate)
-use_virtualenv("r-tensorflow")
-library(keras)
-
-source("reuters_reviews_utils/reuters_reviews_utils.R")
 
 # ========================================
 # Begin Script

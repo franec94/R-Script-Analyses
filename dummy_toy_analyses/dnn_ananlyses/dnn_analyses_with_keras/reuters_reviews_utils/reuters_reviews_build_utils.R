@@ -3,6 +3,8 @@
 # analyses
 # ========================================
 
+# Build Default Model
+# ========================================
 build_model <- function(input_shape) {
   model <- keras_model_sequential() %>%
     layer_dense(units = 64, activation = "relu",
@@ -51,6 +53,8 @@ build_model_with_dropout <- function(input_shape, dropout_rate = 0.5) {
 }
 
 
+# Build Small Model
+# ========================================
 build_small_model <- function(input_shape) {
   model <- keras_model_sequential() %>%
     layer_dense(units = 16, activation = "relu",
@@ -83,6 +87,8 @@ build_small_model_with_dropout <- function(input_shape, dropout_rate = 0.5) {
 }
 
 
+# Build Information Bottleneck Model
+# ========================================
 build_information_bottleneck_model <- function(input_shape) {
   model <- keras_model_sequential() %>%
     layer_dense(units = 64, activation = "relu",
@@ -131,3 +137,6 @@ to_one_hot <- function(labels, dimension = 46) {
   }
   results
 }
+
+# End reuters_reviews_build_utils
+

@@ -33,8 +33,8 @@ sns <- import('seaborn')
 plt <- import('matplotlib.pyplot')
 pd <- import('pandas')
 
-source("boston_housing_utils/boston_housing_build_utils.R")
-source("boston_housing_utils/boston_housing_train_utils.R")
-source("boston_housing_utils/boston_housing_plot_utils.R")
+source("reuters_reviews_utils/reuters_reviews_build_utils.R")
+source("reuters_reviews_utils/reuters_reviews_train_utils.R")
+# source("reuters_reviews_utils/reuters_reviews_plot_utils.R")
 
 # End bostom_housing_setup_utils.R
