@@ -43,6 +43,7 @@ test_targets <- to_categorical(test_targets)
 
 input_shape <- c(28 * 28)
 model <- build_model(input_shape = input_shape)
+print(model)
 
 result_train <- model %>% fit(
     train_data, train_targets,

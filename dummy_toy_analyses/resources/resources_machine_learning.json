@@ -1,0 +1,14 @@
+{
+    "Toward Data Science": {
+        "Feature Reduction" : [
+            {
+                "link": "https://towardsdatascience.com/principal-component-analysis-pca-101-using-r-361f4c53a9ff",
+                "title": "Principal Component Analysis (PCA) 101, using R"
+            },
+            {
+                "link": "https://towardsdatascience.com/linear-discriminant-analysis-lda-101-using-r-6a97217a55a6",
+                "title": "Linear Discriminant Analysis (LDA) 101, using R"
+            }
+        ]
+    }
+}
